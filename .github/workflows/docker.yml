@@ -1,0 +1,56 @@
+name: Build and Push Docker Images
+
+on:
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  TARGET_REPO: kmycode/mastodon
+  TARGET_BRANCH: releases/16
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.TARGET_REPO }}
+          ref: ${{ env.TARGET_BRANCH }}
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Build and push main application image
+      - name: Build and push main Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/lqvp/kmyblue-ghcr:latest-16
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # Build and push streaming image
+      - name: Build and push streaming Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./streaming/Dockerfile
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/lqvp/kmyblue-ghcr-streaming:latest-16
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
