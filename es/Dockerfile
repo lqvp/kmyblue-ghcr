@@ -7,4 +7,4 @@ RUN curl -Lo sudachi-dictionary-20241021-core.zip http://sudachi.s3-website-ap-n
     mv sudachi-dictionary-20241021/system_core.dic /usr/share/elasticsearch/config/sudachi/ && \
     rm -rf sudachi-dictionary-20241021-core.zip sudachi-dictionary-20241021/
 
-RUN echo '{"systemDict": "system_core.dic"}' > /usr/share/elasticsearch/sudachi/config.json
+RUN echo '{"systemDict": "system_core.dic"}' > /usr/share/elasticsearch/config/sudachi/config.json
