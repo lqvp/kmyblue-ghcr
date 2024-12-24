@@ -1,18 +1,10 @@
-ARG ELASTIC_VER=7.17.8
-ARG SUDACHI_PLUGIN_VER=3.3.0
+FROM docker.elastic.co/elasticsearch/elasticsearch:7.17.8
 
+RUN elasticsearch-plugin install https://github.com/WorksApplications/elasticsearch-sudachi/releases/download/v3.3.0/analysis-sudachi-7.17.8-3.3.0.zip
+RUN curl -Lo sudachi-dictionary-20241021-core.zip http://sudachi.s3-website-ap-northeast-1.amazonaws.com/sudachidict/sudachi-dictionary-20241021-core.zip && \
+    unzip sudachi-dictionary-20241021-core.zip && \
+    mkdir -p /usr/share/elasticsearch/config/sudachi/ && \
+    mv sudachi-dictionary-20241021/system_core.dic /usr/share/elasticsearch/config/sudachi/ && \
+    rm -rf sudachi-dictionary-20241021-core.zip sudachi-dictionary-20241021/
 
-######################################################################
-# Sudachiプラグインを入れたElasticsearchのイメージをビルドする
-######################################################################
-FROM docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC_VER}
-
-ARG ELASTIC_VER
-ARG SUDACHI_PLUGIN_VER
-
-
-RUN wget http://sudachi.s3-website-ap-northeast-1.amazonaws.com/sudachidict/sudachi-dictionary-latest-core.zip && \
-    wget http://sudachi.s3-website-ap-northeast-1.amazonaws.com/sudachidict/sudachi-dictionary-latest-full.zip &&  \
-    unzip -o -d config/sudachi -j  'sudachi-dictionary*.zip'  && \
-    rm -f sudachi-dictionary*.zip && \
-    bin/elasticsearch-plugin install https://github.com/WorksApplications/elasticsearch-sudachi/releases/download/v${ELASTIC_VER}-${SUDACHI_PLUGIN_VER}/analysis-sudachi-elasticsearch${ELASTIC_VER}-${SUDACHI_PLUGIN_VER}.zip
+COPY sudachi.json  /usr/share/elasticsearch/config/sudachi/
