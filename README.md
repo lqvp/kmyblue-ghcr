@@ -1,5 +1,5 @@
 # kmyblue-ghcr
-kmyblueのビルド済みイメージを作るところ
+[kmyblue](https://github.com/kmycode/mastodon)のビルド済みイメージを作るところ
 
 下のやつを`docker-compose.yml`で指定してあげれば使えます。
 
