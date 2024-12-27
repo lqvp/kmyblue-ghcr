@@ -9,7 +9,7 @@
 - Streaming service:
   - `ghcr.io/lqvp/kmyblue-ghcr-streaming:latest-16`
  
-# kmyblue-15-lts
+# kmyblue-15.x-lts
 - Main application (web & sidekiq):
   - `ghcr.io/lqvp/kmyblue-ghcr:latest-15`
 - Streaming service:
