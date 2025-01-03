@@ -35,5 +35,6 @@ jobs:
           file: ./es/Dockerfile
           push: true
           tags: ${{ env.REGISTRY }}/lqvp/elasticsearch-${{ env.ELASTIC_VER }}-${{ env.SUDACHI_PLUGIN_VER }}
+          platforms: linux/amd64,linux/arm64
           cache-from: type=gha
           cache-to: type=gha,mode=max

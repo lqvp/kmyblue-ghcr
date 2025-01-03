@@ -40,6 +40,7 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/lqvp/kmyblue-ghcr:latest-15
+          platforms: linux/amd64,linux/arm64
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -52,5 +53,6 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/lqvp/kmyblue-ghcr-streaming:latest-15
+          platforms: linux/amd64,linux/arm64
           cache-from: type=gha
           cache-to: type=gha,mode=max
