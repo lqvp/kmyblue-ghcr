@@ -1,4 +1,4 @@
-FROM docker.elastic.co/elasticsearch/elasticsearch:7.17.8
+FROM docker.elastic.co/elasticsearch/elasticsearch:7.17.27
 
 RUN elasticsearch-plugin install https://github.com/WorksApplications/elasticsearch-sudachi/releases/download/v3.3.0/elasticsearch-7.17.8-analysis-sudachi-3.3.0.zip
 RUN curl -Lo sudachi-dictionary-20241021-core.zip http://sudachi.s3-website-ap-northeast-1.amazonaws.com/sudachidict/sudachi-dictionary-20241021-core.zip && \
