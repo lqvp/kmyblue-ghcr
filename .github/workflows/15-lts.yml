@@ -34,7 +34,7 @@ jobs:
 
       # Build and push main application image
       - name: Build and push main Docker image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: true
@@ -46,7 +46,7 @@ jobs:
 
       # Build and push streaming image
       - name: Build and push streaming Docker image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./streaming/Dockerfile
