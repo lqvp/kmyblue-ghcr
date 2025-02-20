@@ -1,4 +1,4 @@
-name: Build and Push Docker Images-15lts
+name: kmyblue-15
 
 on:
   workflow_dispatch:
