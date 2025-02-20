@@ -1,4 +1,4 @@
-name: Build and Push Docker Images
+name: kmy-16
 
 on:
   workflow_dispatch:
