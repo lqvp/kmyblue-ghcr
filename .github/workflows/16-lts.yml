@@ -1,4 +1,4 @@
-name: kmy-16
+name: kmyblue-16
 
 on:
   workflow_dispatch:
